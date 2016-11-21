@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Volunteers</string>
 
+    <string name="facebook_app_id">1877472095820400</string>
+
     <!-- Login Fragment -->
     <string name="buttonLoginFB">Login with Facebook</string>
 

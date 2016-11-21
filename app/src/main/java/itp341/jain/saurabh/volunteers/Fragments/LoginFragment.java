@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.facebook.login.widget.LoginButton;
+
 import itp341.jain.saurabh.volunteers.R;
 
 /**
@@ -15,6 +17,8 @@ import itp341.jain.saurabh.volunteers.R;
  * create an instance of this fragment.
  */
 public class LoginFragment extends Fragment {
+
+    LoginButton mLoginButton;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -48,7 +52,12 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false);
+        View view = inflater.inflate(R.layout.fragment_login, container, false);
+
+        mLoginButton = (LoginButton) view.findViewById(R.id.login_fragment_login);
+        
+
+        return view;
     }
 
 }
