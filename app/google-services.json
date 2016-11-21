@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "466890350769",
+    "firebase_url": "https://volunteers-1e974.firebaseio.com",
+    "project_id": "volunteers-1e974",
+    "storage_bucket": "volunteers-1e974.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:466890350769:android:6798b06c18ec08c1",
+        "android_client_info": {
+          "package_name": "itp341.jain.saurabh.volunteers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "466890350769-nclkncd41e23ld9dl0u3utuaabmsnebk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDq2TO7W6R2fzzJpgt2Fi51YELPY7y7zg8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
