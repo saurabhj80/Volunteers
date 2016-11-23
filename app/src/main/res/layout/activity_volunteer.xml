@@ -9,4 +9,12 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="itp341.jain.saurabh.volunteers.Activity.VolunteerActivity">
 
+
+    <fragment
+        android:id="@+id/volunteer_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="itp341.jain.saurabh.volunteers.Fragments.VolunteerFragment"
+        tools:layout="@layout/fragment_volunteer_list" />
+
 </RelativeLayout>
