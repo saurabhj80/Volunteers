@@ -4,51 +4,88 @@
     android:layout_height="match_parent"
     tools:context="itp341.jain.saurabh.volunteers.Fragments.DetailedVolunteerFragment">
 
-
-    <!--<fragment-->
-        <!--android:name="com.google.android.gms.maps.MapFragment"-->
-        <!--android:id="@+id/map"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"/>-->
-
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
+
+
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </FrameLayout>
 
         <TextView
+            android:id="@+id/detailed_volunteer_fragment_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Title"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_gravity="center_horizontal"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/frameLayout"
+            android:layout_marginTop="@dimen/activity_vertical_margin"/>
 
         <TextView
+            android:id="@+id/detailed_volunteer_fragment_org"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Org"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_below="@+id/detailed_volunteer_fragment_title"
+            android:layout_centerHorizontal="true"/>
 
         <TextView
+            android:id="@+id/detailed_volunteer_fragment_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="time"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/detailed_volunteer_fragment_org"/>
 
         <TextView
+            android:id="@+id/detailed_volunteer_fragment_des"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:text="Des"
             android:textSize="14sp"
-            android:inputType="textMultiLine"/>
+            android:inputType="textMultiLine"
+            android:layout_below="@+id/detailed_volunteer_fragment_date"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"/>
 
-    </LinearLayout>
+        <Button
+            android:id="@+id/detailed_volunteer_fragment_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Register"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@+id/detailed_volunteer_fragment_contact"
+            android:layout_alignStart="@+id/detailed_volunteer_fragment_contact"
+            android:layout_alignEnd="@+id/detailed_volunteer_fragment_contact"
+            android:backgroundTint="@color/blue"
+            android:textColor="@color/white"/>
+
+
+        <Button
+            android:id="@+id/detailed_volunteer_fragment_contact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contact Us"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:minWidth="200dp"
+            android:backgroundTint="@color/blue"
+            android:textColor="@color/white"/>
+
+    </RelativeLayout>
 
 
 </FrameLayout>

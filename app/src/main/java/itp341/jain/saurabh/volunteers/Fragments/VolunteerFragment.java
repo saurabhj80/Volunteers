@@ -65,6 +65,7 @@ public class VolunteerFragment extends android.support.v4.app.Fragment {
             VolunteerAdapter adapter = new VolunteerAdapter(
                     Volunteer.class,
                     R.layout.fragment_volunteer,
+                    ViewHolder.class,
                     FirebaseManager.Reference(FirebaseManager.FIRMANAGER_VOLUNTEER)
             );
             // Set the listener to receive updates from the adapter
