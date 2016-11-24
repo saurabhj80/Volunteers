@@ -9,10 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import itp341.jain.saurabh.volunteers.Manager.FirebaseManager;
+import itp341.jain.saurabh.volunteers.Model.Volunteer;
 import itp341.jain.saurabh.volunteers.R;
-import itp341.jain.saurabh.volunteers.Fragments.dummy.DummyContent;
-import itp341.jain.saurabh.volunteers.Fragments.dummy.DummyContent.DummyItem;
-
 
 /**
  * A fragment representing a list of Items.
@@ -33,8 +32,6 @@ public class VolunteerFragment extends android.support.v4.app.Fragment {
      */
     public VolunteerFragment() {}
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
     public static VolunteerFragment newInstance(int columnCount) {
         VolunteerFragment fragment = new VolunteerFragment();
         Bundle args = new Bundle();
@@ -65,7 +62,16 @@ public class VolunteerFragment extends android.support.v4.app.Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new VolunteeAdapter(DummyContent.ITEMS, mListener));
+            VolunteerAdapter adapter = new VolunteerAdapter(
+                    Volunteer.class,
+                    R.layout.fragment_volunteer,
+                    FirebaseManager.Reference("volunteers")
+            );
+            // Set the listener to receive updates from the adapter
+            if (mListener != null) {
+                adapter.setListener(mListener);
+            }
+            recyclerView.setAdapter(adapter);
         }
         return view;
     }
@@ -76,9 +82,6 @@ public class VolunteerFragment extends android.support.v4.app.Fragment {
         super.onAttach(context);
         if (context instanceof OnListFragmentInteractionListener) {
             mListener = (OnListFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnListFragmentInteractionListener");
         }
     }
 
@@ -99,7 +102,6 @@ public class VolunteerFragment extends android.support.v4.app.Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(Volunteer item);
     }
 }
