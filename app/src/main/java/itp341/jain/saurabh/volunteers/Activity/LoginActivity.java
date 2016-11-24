@@ -1,5 +1,6 @@
 package itp341.jain.saurabh.volunteers.Activity;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
@@ -28,6 +29,9 @@ public class LoginActivity extends FragmentActivity {
         if (user != null) {
 
         }
+
+        // DEBUGGING
+        startActivity(new Intent(this, VolunteerActivity.class));
 
     }
 

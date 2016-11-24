@@ -37,8 +37,8 @@ public class VolunteeAdapter extends RecyclerView.Adapter<VolunteeAdapter.ViewHo
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        //holder.mIdView.setText(mValues.get(position).id);
+        //holder.mContentView.setText(mValues.get(position).content);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,7 +46,7 @@ public class VolunteeAdapter extends RecyclerView.Adapter<VolunteeAdapter.ViewHo
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
+                    //mListener.onListFragmentInteraction(holder.mItem);
                 }
             }
         });
@@ -57,22 +57,30 @@ public class VolunteeAdapter extends RecyclerView.Adapter<VolunteeAdapter.ViewHo
         return mValues.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    // The cell class
+    public class ViewHolder extends RecyclerView.ViewHolder
+    {
+        // UI
         public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
+        public final TextView textViewTitle;
+        public final TextView textViewDate;
+        public final TextView textViewOrg;
+        public final TextView textViewDes;
+
         public DummyItem mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.id);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            textViewTitle = (TextView) view.findViewById(R.id.volunteer_title);
+            textViewDate = (TextView) view.findViewById(R.id.volunteer_date);
+            textViewOrg = (TextView) view.findViewById(R.id.volunteer_org);
+            textViewDes = (TextView) view.findViewById(R.id.volunteer_des);
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString() + " '" + textViewTitle.getText() + "'";
         }
     }
 }
