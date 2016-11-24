@@ -8,6 +8,8 @@ import com.google.firebase.database.FirebaseDatabase;
  */
 public class FirebaseManager {
 
+    public final static String FIRMANAGER_VOLUNTEER = "volunteers";
+
     // Returns the reference to the database
     public static DatabaseReference Reference(String s) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
