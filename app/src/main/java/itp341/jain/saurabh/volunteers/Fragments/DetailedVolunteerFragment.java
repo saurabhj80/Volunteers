@@ -1,7 +1,11 @@
 package itp341.jain.saurabh.volunteers.Fragments;
 
 
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +15,11 @@ import android.widget.TextView;
 
 import com.google.android.gms.maps.SupportMapFragment;
 
+import itp341.jain.saurabh.volunteers.Manager.PermissionManager;
 import itp341.jain.saurabh.volunteers.Model.Volunteer;
 import itp341.jain.saurabh.volunteers.R;
+import itp341.jain.saurabh.volunteers.Utility.Utilities;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link DetailedVolunteerFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class DetailedVolunteerFragment extends android.support.v4.app.Fragment {
 
     // Model
@@ -68,11 +69,42 @@ public class DetailedVolunteerFragment extends android.support.v4.app.Fragment {
         mContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if (data.getPhone() != null) {
+                    // if we have permissions
+                    if (PermissionManager.getInstance().isCanMakePhone(getContext())) {
+                        makeCall(data.getPhone());
+                    } else { // request a permission
+                        PermissionManager.getInstance().requestPhonePermission(getActivity());
+                    }
+                } else {
+                    Utilities.DisplayToast(getContext(), "Phone not available");
+                }
             }
         });
 
         return view;
+    }
+
+    private void makeCall(String number) {
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        intent.setData(Uri.parse("tel:" + number));
+        startActivity(intent);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
+    {
+        if (PermissionManager
+            .getInstance()
+            .onRequestPermissionsResult(requestCode, permissions, grantResults)
+                )
+        {
+            if (data.getPhone() != null) {
+                makeCall(data.getPhone());
+            }
+        }
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     // The data that is represented by this fragment

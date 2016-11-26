@@ -2,13 +2,11 @@ package itp341.jain.saurabh.volunteers.Fragments;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.Query;
 
 import itp341.jain.saurabh.volunteers.Model.Volunteer;
-import itp341.jain.saurabh.volunteers.R;
 import itp341.jain.saurabh.volunteers.Fragments.VolunteerFragment.OnListFragmentInteractionListener;
 
 public class VolunteerAdapter extends FirebaseRecyclerAdapter<Volunteer, ViewHolder> {

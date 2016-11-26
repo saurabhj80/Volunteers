@@ -11,6 +11,7 @@ public class Volunteer implements Serializable
     private String title;
     private String organization;
     private String description;
+    private String phone;
 
     // Time and date
     private String timeStart;
@@ -65,6 +66,14 @@ public class Volunteer implements Serializable
         this.description = description;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public double getLatitude() {
         return latitude;
     }
@@ -81,7 +90,6 @@ public class Volunteer implements Serializable
         this.longitude = longitude;
     }
 
-
     public Address getAddress() {
         return address;
     }
@@ -89,7 +97,6 @@ public class Volunteer implements Serializable
     public void setAddress(Address address) {
         this.address = address;
     }
-
 
     public String getTimeStart() {
         return timeStart;
