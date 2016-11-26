@@ -24,32 +24,16 @@ public class VLocationManager {
         return manager;
     }
 
-    private static final int TAG_CODE_PERMISSION_LOCATION = 0;
-
     // Must be called to request permission from the user
     public VLocationManager initialize(Activity activity)
     {
         // if we don't have coarse or fine location permission, then we request both of them
-        if (!locationPermission(activity))
+        PermissionManager permissionManager = PermissionManager.getInstance();
+        if (!permissionManager.locationPermission(activity))
         {
-            // Request the permission
-            ActivityCompat.requestPermissions(activity,
-                    new String[] {
-                            Manifest.permission.ACCESS_FINE_LOCATION,
-                            Manifest.permission.ACCESS_COARSE_LOCATION
-                    },
-                    TAG_CODE_PERMISSION_LOCATION);
+            permissionManager.requestLocationPermission(activity);
         }
         return manager;
-    }
-
-    private boolean locationPermission(Activity activity) {
-        return  (checkPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION)
-                && checkPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION));
-    }
-
-    private boolean checkPermission(Activity activity, String permission) {
-        return activity.checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED;
     }
 
     // The last known location
@@ -63,13 +47,9 @@ public class VLocationManager {
     {
         LocationManager manager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
 
-        // Runtime permission check
-        if (activity.checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(activity, new String[] {
-                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION }, 0);
-        }
-        else {
+        // initialize should be called by the user
+        // and that should take care of the permission requirements
+        try {
             // GPS provider is enabled, then request a one time location
             if (manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
                 manager.requestSingleUpdate(LocationManager.GPS_PROVIDER, new LocationListener() {
@@ -95,7 +75,7 @@ public class VLocationManager {
                     }
                 }, null);
             }
-        }
+        } catch (SecurityException e) {}
     }
 
 }
