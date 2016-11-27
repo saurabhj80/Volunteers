@@ -23,7 +23,9 @@ public class Utilities {
             Bundle bundle = new Bundle();
             bundle.putString(FirebaseAnalytics.Param.ITEM_ID, Long.toString(data.getId()));
             bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, data.getTitle());
-            bundle.putString(FirebaseAnalytics.Param.LOCATION, data.getAddress().toString());
+            if (data.getAddress() != null) {
+                bundle.putString(FirebaseAnalytics.Param.LOCATION, data.getAddress().toString());
+            }
             bundle.putString(FirebaseAnalytics.Param.START_DATE, data.getDate());
             bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, data.getContentType());
             return bundle;

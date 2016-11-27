@@ -22,7 +22,7 @@ public class Volunteer implements Serializable
     // Location
     private double latitude;
     private double longitude;
-    private Address address;
+    private Address address = null;
 
     // Necessary for Firebase
     public Volunteer() {}
