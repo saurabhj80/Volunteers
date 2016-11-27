@@ -7,10 +7,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
+import itp341.jain.saurabh.volunteers.Application.VApplication;
 import itp341.jain.saurabh.volunteers.Fragments.VolunteerFragment;
 import itp341.jain.saurabh.volunteers.Manager.VLocationManager;
 import itp341.jain.saurabh.volunteers.Model.Volunteer;
 import itp341.jain.saurabh.volunteers.R;
+import itp341.jain.saurabh.volunteers.Utility.Utilities;
 
 public class VolunteerActivity extends AppCompatActivity implements VolunteerFragment.OnListFragmentInteractionListener {
 
@@ -49,6 +53,12 @@ public class VolunteerActivity extends AppCompatActivity implements VolunteerFra
     // Callbacks when items are clicked
     @Override
     public void onListFragmentInteraction(Volunteer item) {
+        // Log that this volunteer opportunity was clicked on
+        Bundle bundle = Utilities.Analytics.basicInformation(item);
+        VApplication app = (VApplication) getApplication();
+        app.LogEvent(FirebaseAnalytics.Event.VIEW_ITEM, bundle);
+
+        // Show detailed information about the event
         Intent intent = new Intent(this, DetailedVolunteerActivity.class);
         intent.putExtra(DetailedVolunteerActivity.INTENT_VOLUNTEER, item);
         startActivity(intent);

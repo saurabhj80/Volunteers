@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
 import com.facebook.FacebookSdk;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -13,12 +14,12 @@ import itp341.jain.saurabh.volunteers.R;
 
 public class LoginActivity extends FragmentActivity {
 
+    // Fragment contains all the login UI
     LoginFragment loginFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login);
 
         loginFragment = (LoginFragment) getSupportFragmentManager()

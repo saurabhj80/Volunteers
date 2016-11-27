@@ -14,7 +14,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
+import itp341.jain.saurabh.volunteers.Application.VApplication;
 import itp341.jain.saurabh.volunteers.Manager.PermissionManager;
 import itp341.jain.saurabh.volunteers.Model.Volunteer;
 import itp341.jain.saurabh.volunteers.R;
@@ -60,7 +62,7 @@ public class DetailedVolunteerFragment extends android.support.v4.app.Fragment {
         mRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                logRegisterEvent();
             }
         });
 
@@ -69,6 +71,9 @@ public class DetailedVolunteerFragment extends android.support.v4.app.Fragment {
         mContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // log that we tried to reach the organization
+                logPhoneEvent();
+
                 if (data.getPhone() != null) {
                     // if we have permissions
                     if (PermissionManager.getInstance().isCanMakePhone(getContext())) {
@@ -83,6 +88,24 @@ public class DetailedVolunteerFragment extends android.support.v4.app.Fragment {
         });
 
         return view;
+    }
+
+    private void logRegisterEvent() {
+        Bundle bundle = Utilities.Analytics.basicInformation(data);
+        VApplication app = (VApplication) getActivity().getApplication();
+        app.LogEvent(Utilities.Event.REGISTER, bundle);
+    }
+
+    private void logPhoneEvent() {
+        Bundle bundle = Utilities.Analytics.basicInformation(data);
+        if (data.getPhone() != null) {
+            bundle.putString(Utilities.Params.PHONE, data.getPhone());
+            bundle.putBoolean(Utilities.Params.PHONE_REACHABLE, true);
+        } else {
+            bundle.putBoolean(Utilities.Params.PHONE_REACHABLE, false);
+        }
+        VApplication app = (VApplication) getActivity().getApplication();
+        app.LogEvent(Utilities.Event.CONTACT_US, bundle);
     }
 
     private void makeCall(String number) {

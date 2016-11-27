@@ -12,6 +12,7 @@ public class Volunteer implements Serializable
     private String organization;
     private String description;
     private String phone;
+    private long id;
 
     // Time and date
     private String timeStart;
@@ -32,6 +33,10 @@ public class Volunteer implements Serializable
         this.date = date;
         this.organization = organization;
         this.description = description;
+    }
+
+    public String getContentType() {
+        return "Volunteer";
     }
 
     public String getTitle() {
@@ -64,6 +69,14 @@ public class Volunteer implements Serializable
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getPhone() {
@@ -153,6 +166,11 @@ public class Volunteer implements Serializable
 
         public void setZip(int zip) {
             this.zip = zip;
+        }
+
+        @Override
+        public String toString() {
+            return getStreet() + "\n" + getCity() + "\n" + getState() + "-" + getZip();
         }
     }
 }
