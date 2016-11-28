@@ -2,19 +2,20 @@ package itp341.jain.saurabh.volunteers.Fragments;
 
 
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v4.app.Fragment;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import itp341.jain.saurabh.volunteers.Application.VApplication;
 import itp341.jain.saurabh.volunteers.Manager.PermissionManager;
@@ -22,7 +23,8 @@ import itp341.jain.saurabh.volunteers.Model.Volunteer;
 import itp341.jain.saurabh.volunteers.R;
 import itp341.jain.saurabh.volunteers.Utility.Utilities;
 
-public class DetailedVolunteerFragment extends android.support.v4.app.Fragment {
+public class DetailedVolunteerFragment extends android.support.v4.app.Fragment
+        implements OnMapReadyCallback {
 
     // Model
     private Volunteer data;
@@ -33,9 +35,6 @@ public class DetailedVolunteerFragment extends android.support.v4.app.Fragment {
     private TextView mDate;
     private TextView mDescription;
 
-    private Button mRegister;
-    private Button mContact;
-
     // Constructor
     public DetailedVolunteerFragment() {}
 
@@ -45,11 +44,15 @@ public class DetailedVolunteerFragment extends android.support.v4.app.Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_detailed_volunteer, container, false);
 
-        android.support.v4.app.Fragment frag = SupportMapFragment.newInstance();
-        getChildFragmentManager()
-                .beginTransaction()
-                .add(R.id.frameLayout, frag)
-                .commit();
+        // Add the map view if we have the location coordinates
+        if (data.getLatitude() != 0 && data.getLongitude() != 0) {
+            SupportMapFragment frag = SupportMapFragment.newInstance();
+            getChildFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.frameLayout, frag)
+                    .commit();
+            frag.getMapAsync(this);
+        }
 
         // UI
         mTitle = (TextView) view.findViewById(R.id.detailed_volunteer_fragment_title);
@@ -58,7 +61,7 @@ public class DetailedVolunteerFragment extends android.support.v4.app.Fragment {
         mDescription = (TextView) view.findViewById(R.id.detailed_volunteer_fragment_des);
 
         // Register button clicked
-        mRegister = (Button) view.findViewById(R.id.detailed_volunteer_fragment_register);
+        Button mRegister = (Button) view.findViewById(R.id.detailed_volunteer_fragment_register);
         mRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,7 +70,7 @@ public class DetailedVolunteerFragment extends android.support.v4.app.Fragment {
         });
 
         // Phone the organization
-        mContact = (Button) view.findViewById(R.id.detailed_volunteer_fragment_contact);
+        Button mContact = (Button) view.findViewById(R.id.detailed_volunteer_fragment_contact);
         mContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,7 +90,20 @@ public class DetailedVolunteerFragment extends android.support.v4.app.Fragment {
             }
         });
 
+        // Update the UI based on the data
+        updateUI();
+
         return view;
+    }
+    
+    // Called when the map is ready
+    @Override
+    public void onMapReady(GoogleMap map) {
+        LatLng loc = new LatLng(data.getLatitude(), data.getLongitude());
+        MarkerOptions marker = new MarkerOptions()
+                .position(loc)
+                .title("Marker");
+        map.addMarker(marker);
     }
 
     private void logRegisterEvent() {
@@ -119,8 +135,7 @@ public class DetailedVolunteerFragment extends android.support.v4.app.Fragment {
     {
         if (PermissionManager
             .getInstance()
-            .onRequestPermissionsResult(requestCode, permissions, grantResults)
-                )
+            .onRequestPermissionsResult(requestCode, permissions, grantResults))
         {
             if (data.getPhone() != null) {
                 makeCall(data.getPhone());
@@ -146,9 +161,12 @@ public class DetailedVolunteerFragment extends android.support.v4.app.Fragment {
         }
     }
 
-    public static DetailedVolunteerFragment newInstance() {
+    private final static String VOLUNTEER = "volunteer";
+
+    public static DetailedVolunteerFragment newInstance(Volunteer data) {
         DetailedVolunteerFragment fragment = new DetailedVolunteerFragment();
         Bundle args = new Bundle();
+        args.putSerializable(VOLUNTEER, data);
         fragment.setArguments(args);
         return fragment;
     }
@@ -157,7 +175,7 @@ public class DetailedVolunteerFragment extends android.support.v4.app.Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-
+            this.data = (Volunteer) getArguments().getSerializable(VOLUNTEER);
         }
     }
 }

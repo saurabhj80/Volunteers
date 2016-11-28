@@ -14,8 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:name="itp341.jain.saurabh.volunteers.Fragments.LoginFragment"
-        tools:layout="@layout/fragment_login"
-    />
+        tools:layout="@layout/fragment_login" />
 
 
 </RelativeLayout>

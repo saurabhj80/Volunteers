@@ -5,11 +5,17 @@
     android:layout_height="match_parent"
     tools:context="itp341.jain.saurabh.volunteers.Activity.DetailedVolunteerActivity">
 
-    <fragment
-        android:id="@+id/detailed_volunteer_fragment"
+    <FrameLayout
+        android:id="@+id/detailed_volunteer_fragment_frame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:name="itp341.jain.saurabh.volunteers.Fragments.DetailedVolunteerFragment"
-        tools:layout="@layout/fragment_detailed_volunteer" />
+        android:layout_height="match_parent">
+    </FrameLayout>
+
+    <!--<fragment-->
+        <!--android:id="@+id/detailed_volunteer_fragment"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:name="itp341.jain.saurabh.volunteers.Fragments.DetailedVolunteerFragment"-->
+        <!--tools:layout="@layout/fragment_detailed_volunteer" />-->
 
 </RelativeLayout>

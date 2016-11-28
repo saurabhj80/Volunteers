@@ -32,10 +32,14 @@ public class DetailedVolunteerActivity extends AppCompatActivity {
 
         // Access to the detailed fragment
         fragment = (DetailedVolunteerFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.detailed_volunteer_fragment);
-
-        // Will cause the fragment to refresh its UI
-        if (data != null) {
+                .findFragmentById(R.id.detailed_volunteer_fragment_frame);
+        if (fragment == null) {
+            fragment = DetailedVolunteerFragment.newInstance(data);
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.detailed_volunteer_fragment_frame, fragment)
+                    .commit();
+        } else {
             fragment.setVolunteerOpportunity(data);
         }
     }

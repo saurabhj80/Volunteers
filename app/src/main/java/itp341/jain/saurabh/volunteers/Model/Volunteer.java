@@ -20,8 +20,8 @@ public class Volunteer implements Serializable
     private String date;
 
     // Location
-    private double latitude;
-    private double longitude;
+    private double latitude = 0;
+    private double longitude = 0;
     private Address address = null;
 
     // Necessary for Firebase
@@ -51,17 +51,11 @@ public class Volunteer implements Serializable
         return date;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
 
     public String getOrganization() {
         return organization;
     }
 
-    public void setOrganization(String organization) {
-        this.organization = organization;
-    }
 
     public String getDescription() {
         return description;
@@ -140,9 +134,9 @@ public class Volunteer implements Serializable
             return street;
         }
 
-        public void setStreet(String street) {
-            this.street = street;
-        }
+        //public void setStreet(String street) {
+         //   this.street = street;
+        //}
 
         public String getCity() {
             return city;

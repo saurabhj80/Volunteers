@@ -40,7 +40,7 @@ public class Utilities {
 
     public final static class Params {
         public static final String PHONE = "phone";
-        public static final String PHONE_REACHABLE = "PHONE_REACHABLE";
+        public static final String PHONE_REACHABLE = "phone_reachable";
     }
 
 }
