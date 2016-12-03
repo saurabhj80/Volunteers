@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -52,6 +53,10 @@ public class DetailedVolunteerFragment extends android.support.v4.app.Fragment
                     .add(R.id.frameLayout, frag)
                     .commit();
             frag.getMapAsync(this);
+        } else {
+            // Hide the map
+            View frame = view.findViewById(R.id.frameLayout);
+            frame.setVisibility(View.GONE);
         }
 
         // UI
@@ -62,10 +67,26 @@ public class DetailedVolunteerFragment extends android.support.v4.app.Fragment
 
         // Register button clicked
         Button mRegister = (Button) view.findViewById(R.id.detailed_volunteer_fragment_register);
+//        // if data exists on disk, then we need to give users the option to unregister
+//        if (data.ExistsInSugar()) {
+//            mRegister.setText(R.string.volunteer_unregister);
+//        } else {
+//            mRegister.setText(R.string.volunteer_register);
+//        }
         mRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // analytics
                 logRegisterEvent();
+
+//                // if already saved, then we have already registered for this event
+//                if (data.ExistsInSugar()) {
+//                    data.delete();
+//                } else {
+//                    // save the volunteer opportunity to the sqlite database
+//                    data.save();
+//                }
+
             }
         });
 
@@ -104,6 +125,9 @@ public class DetailedVolunteerFragment extends android.support.v4.app.Fragment
                 .position(loc)
                 .title("Marker");
         map.addMarker(marker);
+
+        // Move the map to the marker
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(loc, 10), 4000, null);
     }
 
     private void logRegisterEvent() {

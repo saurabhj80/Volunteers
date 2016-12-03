@@ -12,6 +12,7 @@
     <string name="volunteer_organization">Organization</string>
     <string name="volunteer_date">Date</string>
     <string name="volunteer_register">Register</string>
+    <string name="volunteer_unregister">Unregister</string>
     <string name="volunteer_contact">Contact Us</string>
 
 </resources>

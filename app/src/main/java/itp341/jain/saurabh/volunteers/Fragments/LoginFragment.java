@@ -1,6 +1,8 @@
 package itp341.jain.saurabh.volunteers.Fragments;
 
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -34,7 +36,6 @@ import itp341.jain.saurabh.volunteers.Utility.Utilities;
  */
 public class LoginFragment extends android.support.v4.app.Fragment
 {
-
     // Logging
     private static final String TAG = LoginFragment.class.getName();
 
@@ -50,27 +51,19 @@ public class LoginFragment extends android.support.v4.app.Fragment
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment LoginFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static LoginFragment newInstance(String param1, String param2) {
+    public static LoginFragment newInstance() {
         LoginFragment fragment = new LoginFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
     }
 
-
     @Override
     public void onStart() {
         super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
+        if (mAuthListener != null) {
+            mAuth.addAuthStateListener(mAuthListener);
+        }
     }
 
     @Override
@@ -88,22 +81,28 @@ public class LoginFragment extends android.support.v4.app.Fragment
 
         }
 
+        // Authentication
         mAuth = FirebaseAuth.getInstance();
+//        mAuthListener = new FirebaseAuth.AuthStateListener() {
+//            @Override
+//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+//                FirebaseUser user = firebaseAuth.getCurrentUser();
+//                if (user != null) {
+//
+//
+//                } else {
+//                    Utilities.DisplayToast(getContext(), "You signed out!");
+//                }
+//            }
+//        };
+    }
 
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    // User is signed in
-                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                } else {
-                    // User is signed out
-                    Log.d(TAG, "onAuthStateChanged:signed_out");
-                }
-                // ...
-            }
-        };
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof LoginResultInterface) {
+            mAuthListener = ((LoginResultInterface) context).LoginAuthStateListener();
+        }
     }
 
     @Override
@@ -166,5 +165,9 @@ public class LoginFragment extends android.support.v4.app.Fragment
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         mCallbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public interface LoginResultInterface {
+        FirebaseAuth.AuthStateListener LoginAuthStateListener();
     }
 }

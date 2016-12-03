@@ -1,7 +1,8 @@
 package itp341.jain.saurabh.volunteers.Application;
 
-import android.app.Application;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.multidex.MultiDex;
 
 import com.facebook.FacebookSdk;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -10,7 +11,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
  * Created by saurabhj80 on 11/27/16.
  */
 
-public class VApplication extends Application {
+public class VApplication extends com.orm.SugarApp {
 
     // Analytics
     private FirebaseAnalytics mFirebaseAnalytics;
@@ -23,6 +24,12 @@ public class VApplication extends Application {
 
         // init analytics
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+    }
+
+    @Override
+    protected void attachBaseContext(Context context) {
+        super.attachBaseContext(context);
+        MultiDex.install(this);
     }
 
     public FirebaseAnalytics getAnalytics() {

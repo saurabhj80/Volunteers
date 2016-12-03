@@ -1,18 +1,23 @@
 package itp341.jain.saurabh.volunteers.Model;
 
+import com.orm.SugarRecord;
+
 import java.io.Serializable;
 
 /**
  * Created by saurabhj80 on 11/23/16.
  */
-public class Volunteer implements Serializable
+
+public class Volunteer extends SugarRecord implements Serializable
 {
     // Basic Information
     private String title;
     private String organization;
     private String description;
     private String phone;
-    private long id;
+
+    // FireBase id, but used by Sugar ORM for saving on phone
+    private long vid;
 
     // Time and date
     private String timeStart;
@@ -35,6 +40,16 @@ public class Volunteer implements Serializable
         this.description = description;
     }
 
+    public boolean ExistsInSugar() {
+        Volunteer volunteer = Volunteer.findById(Volunteer.class, getId());
+        if (volunteer != null) {
+            return true;
+        }
+        return false;
+    }
+
+    /************** GETTERS ********************/
+
     public String getContentType() {
         return "Volunteer";
     }
@@ -51,77 +66,46 @@ public class Volunteer implements Serializable
         return date;
     }
 
-
     public String getOrganization() {
         return organization;
     }
-
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
+    // Sugar ORM override
+    @Override
+    public Long getId() {
+        return vid;
     }
 
     public String getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
     public double getLatitude() {
         return latitude;
-    }
-
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
     }
 
     public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
-    }
-
     public Address getAddress() {
         return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
     }
 
     public String getTimeStart() {
         return timeStart;
     }
 
-    public void setTimeStart(String timeStart) {
-        this.timeStart = timeStart;
-    }
-
     public String getTimeEnd() {
         return timeEnd;
     }
 
-    public void setTimeEnd(String timeEnd) {
-        this.timeEnd = timeEnd;
-    }
 
-    public static class Address implements Serializable {
+    public static class Address extends SugarRecord implements Serializable {
 
         private String street;
         private String city;
@@ -134,32 +118,16 @@ public class Volunteer implements Serializable
             return street;
         }
 
-        //public void setStreet(String street) {
-         //   this.street = street;
-        //}
-
         public String getCity() {
             return city;
-        }
-
-        public void setCity(String city) {
-            this.city = city;
         }
 
         public String getState() {
             return state;
         }
 
-        public void setState(String state) {
-            this.state = state;
-        }
-
         public int getZip() {
             return zip;
-        }
-
-        public void setZip(int zip) {
-            this.zip = zip;
         }
 
         @Override

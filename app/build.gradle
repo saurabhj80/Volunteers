@@ -10,6 +10,7 @@ android {
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -39,6 +40,11 @@ dependencies {
 
     // Facebook
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
+
+    // Sugar ORM
+    compile 'com.github.satyan:sugar:1.4'
+
+    compile 'com.android.support:multidex:1.0.0'
 }
 
 // ADD THIS AT THE BOTTOM
