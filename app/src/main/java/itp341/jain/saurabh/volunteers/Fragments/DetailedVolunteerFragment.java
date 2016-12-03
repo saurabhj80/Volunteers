@@ -35,6 +35,7 @@ public class DetailedVolunteerFragment extends android.support.v4.app.Fragment
     private TextView mOrganization;
     private TextView mDate;
     private TextView mDescription;
+    private TextView mLocation;
 
     // Constructor
     public DetailedVolunteerFragment() {}
@@ -45,6 +46,14 @@ public class DetailedVolunteerFragment extends android.support.v4.app.Fragment
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_detailed_volunteer, container, false);
 
+        // UI
+        mTitle = (TextView) view.findViewById(R.id.detailed_volunteer_fragment_title);
+        mOrganization = (TextView) view.findViewById(R.id.detailed_volunteer_fragment_org);
+        mDate = (TextView) view.findViewById(R.id.detailed_volunteer_fragment_date);
+        mDescription = (TextView) view.findViewById(R.id.detailed_volunteer_fragment_des);
+        mLocation = (TextView) view.findViewById(R.id.location);
+
+
         // Add the map view if we have the location coordinates
         if (data.getLatitude() != 0 && data.getLongitude() != 0) {
             SupportMapFragment frag = SupportMapFragment.newInstance();
@@ -53,17 +62,25 @@ public class DetailedVolunteerFragment extends android.support.v4.app.Fragment
                     .add(R.id.frameLayout, frag)
                     .commit();
             frag.getMapAsync(this);
+
+            // Hide or display the location text view
+            Volunteer.Address address = data.getAddress();
+            if (address != null) {
+                String add = address.toString();
+                if (add != null) {
+                    mLocation.setText(add);
+                } else {
+                    mLocation.setVisibility(View.GONE);
+                }
+            } else {
+                mLocation.setVisibility(View.GONE);
+            }
+
         } else {
             // Hide the map
-            View frame = view.findViewById(R.id.frameLayout);
-            frame.setVisibility(View.GONE);
+            View location = view.findViewById(R.id.map);
+            location.setVisibility(View.GONE);
         }
-
-        // UI
-        mTitle = (TextView) view.findViewById(R.id.detailed_volunteer_fragment_title);
-        mOrganization = (TextView) view.findViewById(R.id.detailed_volunteer_fragment_org);
-        mDate = (TextView) view.findViewById(R.id.detailed_volunteer_fragment_date);
-        mDescription = (TextView) view.findViewById(R.id.detailed_volunteer_fragment_des);
 
         // Register button clicked
         Button mRegister = (Button) view.findViewById(R.id.detailed_volunteer_fragment_register);

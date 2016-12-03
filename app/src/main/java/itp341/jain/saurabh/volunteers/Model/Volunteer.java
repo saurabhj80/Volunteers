@@ -107,10 +107,10 @@ public class Volunteer extends SugarRecord implements Serializable
 
     public static class Address extends SugarRecord implements Serializable {
 
-        private String street;
-        private String city;
-        private String state;
-        private int zip;
+        private String street = null;
+        private String city = null;
+        private String state = null;
+        private int zip = 0;
 
         public Address() {}
 
@@ -132,7 +132,31 @@ public class Volunteer extends SugarRecord implements Serializable
 
         @Override
         public String toString() {
-            return getStreet() + "\n" + getCity() + "\n" + getState() + "-" + getZip();
+            StringBuilder builder = new StringBuilder();
+            String str = getStreet();
+            if (str != null) {
+                builder.append(str);
+                builder.append("\n");
+            }
+            str = getCity();
+            if (str != null) {
+                builder.append(str);
+                builder.append("\n");
+            }
+            str = getState();
+            if (str != null) {
+                builder.append(str);
+            }
+            if (getZip() != 0) {
+                builder.append(" - ");
+                builder.append(getZip());
+            }
+
+            // if we added something to the builder
+            if (builder.length() > 0) {
+                return builder.toString();
+            }
+            return null;
         }
     }
 }

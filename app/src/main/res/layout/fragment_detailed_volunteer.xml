@@ -13,14 +13,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <FrameLayout
-                android:id="@+id/frameLayout"
+            <LinearLayout
+                android:id="@+id/map"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginTop="16dp">
-            </FrameLayout>
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:id="@+id/frameLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="16dp">
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:gravity="center"/>
+            </LinearLayout>
+
 
             <TextView
                 android:id="@+id/detailed_volunteer_fragment_title"
@@ -33,7 +49,7 @@
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:layout_gravity="center_horizontal"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@+id/frameLayout"
+                android:layout_below="@+id/map"
                 android:layout_marginTop="@dimen/activity_vertical_margin"/>
 
             <TextView
