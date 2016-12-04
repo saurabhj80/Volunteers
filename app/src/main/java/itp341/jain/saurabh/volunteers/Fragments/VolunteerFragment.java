@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.database.Query;
+
 import itp341.jain.saurabh.volunteers.Manager.FirebaseManager;
 import itp341.jain.saurabh.volunteers.Model.Volunteer;
 import itp341.jain.saurabh.volunteers.R;
@@ -62,11 +64,16 @@ public class VolunteerFragment extends android.support.v4.app.Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
+
+            // Custom query
+            Query ref = FirebaseManager.Reference(FirebaseManager.FIRMANAGER_VOLUNTEER);
+
+
             VolunteerAdapter adapter = new VolunteerAdapter(
                     Volunteer.class,
                     R.layout.fragment_volunteer,
                     ViewHolder.class,
-                    FirebaseManager.Reference(FirebaseManager.FIRMANAGER_VOLUNTEER)
+                    ref
             );
             // Set the listener to receive updates from the adapter
             if (mListener != null) {

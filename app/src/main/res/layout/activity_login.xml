@@ -9,12 +9,19 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".Activity.LoginActivity">
 
-    <fragment
-        android:id="@+id/login_fragment"
+    <FrameLayout
+        android:id="@+id/loginActivity_frame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:name="itp341.jain.saurabh.volunteers.Fragments.LoginFragment"
-        tools:layout="@layout/fragment_login" />
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+
+    <!--<fragment-->
+        <!--android:id="@+id/login_fragment"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:name="itp341.jain.saurabh.volunteers.Fragments.LoginFragment"-->
+        <!--tools:layout="@layout/fragment_login" />-->
 
 
 </RelativeLayout>

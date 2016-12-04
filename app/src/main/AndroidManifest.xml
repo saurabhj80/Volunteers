@@ -33,8 +33,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".Activity.VolunteerActivity" />
-        <activity android:name=".Activity.DetailedVolunteerActivity"></activity>
+
+        <activity android:name=".Activity.DetailedVolunteerActivity">
+
+        </activity>
     </application>
 
 </manifest>

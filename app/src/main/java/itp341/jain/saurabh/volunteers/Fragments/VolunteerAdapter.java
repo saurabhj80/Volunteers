@@ -1,6 +1,5 @@
 package itp341.jain.saurabh.volunteers.Fragments;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
