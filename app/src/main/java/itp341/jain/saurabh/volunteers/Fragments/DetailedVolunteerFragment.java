@@ -53,7 +53,6 @@ public class DetailedVolunteerFragment extends android.support.v4.app.Fragment
         mDescription = (TextView) view.findViewById(R.id.detailed_volunteer_fragment_des);
         mLocation = (TextView) view.findViewById(R.id.location);
 
-
         // Add the map view if we have the location coordinates
         if (data.getLatitude() != 0 && data.getLongitude() != 0) {
             SupportMapFragment frag = SupportMapFragment.newInstance();
@@ -84,12 +83,12 @@ public class DetailedVolunteerFragment extends android.support.v4.app.Fragment
 
         // Register button clicked
         Button mRegister = (Button) view.findViewById(R.id.detailed_volunteer_fragment_register);
-//        // if data exists on disk, then we need to give users the option to unregister
-//        if (data.ExistsInSugar()) {
-//            mRegister.setText(R.string.volunteer_unregister);
-//        } else {
-//            mRegister.setText(R.string.volunteer_register);
-//        }
+        // if data exists on disk, then we need to give users the option to unregister
+        if (data.ExistsInSugar()) {
+            mRegister.setText(R.string.volunteer_unregister);
+        } else {
+            mRegister.setText(R.string.volunteer_register);
+        }
         mRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

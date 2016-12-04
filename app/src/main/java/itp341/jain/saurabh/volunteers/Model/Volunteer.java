@@ -1,6 +1,5 @@
 package itp341.jain.saurabh.volunteers.Model;
 
-import com.orm.SugarRecord;
 
 import java.io.Serializable;
 
@@ -8,7 +7,7 @@ import java.io.Serializable;
  * Created by saurabhj80 on 11/23/16.
  */
 
-public class Volunteer extends SugarRecord implements Serializable
+public class Volunteer implements Serializable
 {
     // Basic Information
     private String title;
@@ -41,10 +40,10 @@ public class Volunteer extends SugarRecord implements Serializable
     }
 
     public boolean ExistsInSugar() {
-        Volunteer volunteer = Volunteer.findById(Volunteer.class, getId());
-        if (volunteer != null) {
-            return true;
-        }
+//        Volunteer volunteer = Volunteer.findById(Volunteer.class, getId());
+//        if (volunteer != null) {
+//            return true;
+//        }
         return false;
     }
 
@@ -74,8 +73,8 @@ public class Volunteer extends SugarRecord implements Serializable
         return description;
     }
 
-    // Sugar ORM override
-    @Override
+//    // Sugar ORM override
+//    @Override
     public Long getId() {
         return vid;
     }
@@ -104,8 +103,7 @@ public class Volunteer extends SugarRecord implements Serializable
         return timeEnd;
     }
 
-
-    public static class Address extends SugarRecord implements Serializable {
+    public static class Address implements Serializable {
 
         private String street = null;
         private String city = null;
