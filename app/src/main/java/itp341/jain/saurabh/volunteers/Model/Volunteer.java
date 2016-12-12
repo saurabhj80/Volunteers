@@ -15,7 +15,7 @@ public class Volunteer implements Serializable
     private String description;
     private String phone;
 
-    // FireBase id, but used by Sugar ORM for saving on phone
+    // FireBase id
     private long vid;
 
     // Time and date
@@ -73,8 +73,10 @@ public class Volunteer implements Serializable
         return description;
     }
 
-//    // Sugar ORM override
-//    @Override
+    public long getVid() {
+        return vid;
+    }
+
     public Long getId() {
         return vid;
     }
@@ -101,6 +103,10 @@ public class Volunteer implements Serializable
 
     public String getTimeEnd() {
         return timeEnd;
+    }
+
+    public void setVid(long vid) {
+        this.vid = vid;
     }
 
     public static class Address implements Serializable {

@@ -2,6 +2,7 @@ package itp341.jain.saurabh.volunteers.Fragments;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import itp341.jain.saurabh.volunteers.R;
@@ -18,14 +19,21 @@ public class ViewHolder extends RecyclerView.ViewHolder
     public final TextView textViewDate;
     public final TextView textViewOrg;
     public final TextView textViewDes;
+    public final ImageView imageView;
+
+    public ImageView getImageView() {
+        return imageView;
+    }
 
     public ViewHolder(View view) {
         super(view);
+
         mView = view;
         textViewTitle = (TextView) view.findViewById(R.id.volunteer_title);
         textViewDate = (TextView) view.findViewById(R.id.volunteer_date);
         textViewOrg = (TextView) view.findViewById(R.id.volunteer_org);
         textViewDes = (TextView) view.findViewById(R.id.volunteer_des);
+        imageView = (ImageView) view.findViewById(R.id.imageView);
     }
 
     public void setTitle(String title) {

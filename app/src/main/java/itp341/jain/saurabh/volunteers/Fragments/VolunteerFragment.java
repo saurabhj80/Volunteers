@@ -74,7 +74,8 @@ public class VolunteerFragment extends android.support.v4.app.Fragment {
                     R.layout.fragment_volunteer,
                     ViewHolder.class,
                     ref
-            );
+            ).setParentFragment(this);
+
             // Set the listener to receive updates from the adapter
             if (mListener != null) {
                 adapter.setListener(mListener);

@@ -149,7 +149,6 @@ public class DetailedVolunteerFragment extends android.support.v4.app.Fragment
             @Override
             public void onMapLongClick(LatLng latLng) {
                 // Location
-                //Uri gmmIntentUri = Uri.parse("geo:"+ data.getLatitude()+"," + data.getLongitude());
                 Uri location = Uri.parse("google.navigation:q="
                         + data.getLatitude()
                         + "," + data.getLongitude()

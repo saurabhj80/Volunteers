@@ -35,20 +35,17 @@ dependencies {
     compile 'com.google.firebase:firebase-database:9.8.0'
     compile 'com.google.firebase:firebase-messaging:9.8.0'
     compile 'com.firebaseui:firebase-ui-database:1.0.0'
-
-    // Geofire
-    // compile 'com.firebase:geofire-android:2.1.1'
+    compile 'com.firebaseui:firebase-ui-storage:1.0.0'
 
     // Facebook
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
 
-    // Sugar ORM
-    // compile 'com.github.satyan:sugar:1.4'
-
     // Multidex support
     compile 'com.android.support:multidex:1.0.1'
+
+    // Glide
+    compile 'com.github.bumptech.glide:glide:3.7.0'
 }
 
 // ADD THIS AT THE BOTTOM
-//apply plugin: 'realm-android'
 apply plugin: 'com.google.gms.google-services'

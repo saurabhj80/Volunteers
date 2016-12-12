@@ -7,7 +7,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -18,32 +19,52 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/volunteer_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/volunteer_title"
-                android:textStyle="bold"
-                android:textSize="18sp"/>
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/imageView"/>
 
-            <TextView
-                android:id="@+id/volunteer_date"
-                android:layout_width="wrap_content"
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/volunteer_date"
-                android:textSize="14sp"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/volunteer_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/volunteer_title"
+                        android:textStyle="bold"
+                        android:textSize="18sp"/>
+
+                    <TextView
+                        android:id="@+id/volunteer_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/volunteer_date"
+                        android:textSize="14sp"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/volunteer_org"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/volunteer_organization"
+                    android:textSize="14sp"/>
+
+            </LinearLayout>
 
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/volunteer_org"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="@string/volunteer_organization"
-            android:textSize="14sp"/>
 
         <TextView
             android:id="@+id/volunteer_des"
@@ -54,6 +75,5 @@
             android:textSize="14sp"/>
 
     </LinearLayout>
-
 
 </android.support.v7.widget.CardView>
