@@ -69,8 +69,14 @@ public class FirebaseManager
                 // we have an event
                 if (vid != null) {
                     QueryData(vid, callback);
+                } else {
+                    callback.DataFromNotification(null);
                 }
+            } else {
+                callback.DataFromNotification(null);
             }
+        } else {
+            callback.DataFromNotification(null);
         }
     }
 

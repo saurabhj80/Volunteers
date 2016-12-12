@@ -144,6 +144,25 @@ public class DetailedVolunteerFragment extends android.support.v4.app.Fragment
 
         // Move the map to the marker
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(loc, 10), 4000, null);
+
+        map.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+            @Override
+            public void onMapLongClick(LatLng latLng) {
+                // Location
+                //Uri gmmIntentUri = Uri.parse("geo:"+ data.getLatitude()+"," + data.getLongitude());
+                Uri location = Uri.parse("google.navigation:q="
+                        + data.getLatitude()
+                        + "," + data.getLongitude()
+                        + "&mode=d");
+
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, location);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                // if google maps installed
+                if (mapIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+                    startActivity(mapIntent);
+                }
+            }
+        });
     }
 
     private void logRegisterEvent() {
